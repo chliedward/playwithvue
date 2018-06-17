@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>my-first-mvn-web-app</groupId>
+  <artifactId>my-first-mvn-web-app-build</artifactId>
+  <version>18.06.SNAPSHOT</version>
+  <!-- This packaging means no need to generate jar, war, ... -->
+  <packaging>pom</packaging>
+  <!-- name defines the name for this module that shows on mvn console -->
+  <name>my-first-mvn-web-app-build</name>
+  
+  <properties>
+     <java.version>1.8</java.version>
+	 <maven.compiler.target>1.8</maven.compiler.target>
+	 <maven.compiler.source>1.8</maven.compiler.source>
+	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 <junit.version>3.8.1</junit.version>
+	 <spring.boot.starter>2.0.2.RELEASE</spring.boot.starter>
+	 <spring.version>4.3.5.RELEASE</spring.version>
+  </properties>
+  <dependencyManagement>
+  	<dependencies>
+  		<!--  from srping boot starter  -->
+	  	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.starter}</version>
+			</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring.boot.starter}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.starter}</version>
+			<scope>test</scope>
+		</dependency>
+  	</dependencies>
+  </dependencyManagement>
+  <build>
+    <!-- managing the version if children use the plugins -->
+    <pluginManagement>
+      <plugins>
+	    <plugin>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-maven-plugin</artifactId>
+		  <version>${spring.boot.starter}</version>
+	    </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
