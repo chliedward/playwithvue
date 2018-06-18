@@ -8,10 +8,9 @@
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
 	<!-- set base-package to the Controller's package -->
-	<context:component-scan base-package="front" />
-
-
+	<context:component-scan base-package="front2" />
 
 	<!-- following line is telling the "ModelAndView" to find the file  -->
 	<bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">

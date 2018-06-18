@@ -1,18 +1,14 @@
-package front;
+package front2;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// RequestMapping on the class will represent as the first part of path after "AppContext"'s url
-// EX: 
-//   localhost:xxxx/my-first-mvn-web-app-front/dispatcher1/
 @Controller
-@RequestMapping("/helloWorld")
-public class HelloWorldController {
+public class HelloWorld2Controller {
 
-	@RequestMapping("/hello")
+	@RequestMapping("/hello2")
 	public ModelAndView welcomeMessage(
 			@RequestParam(value = "name", required = false) String name) {
 		// Name of your jsp file as parameter

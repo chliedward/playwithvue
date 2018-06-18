@@ -3,10 +3,13 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <context-param>
+    <display-name>Archetype Created Web Application</display-name>
+    <context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+		<param-value>
+		/WEB-INF/springmvcdispatcher-servlet.xml,
+		/WEB-INF/springmvcdispatcher2-servlet.xml,
+		</param-value>
 	</context-param>
 	
 	<listener>
@@ -14,17 +17,48 @@
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-	
+        <!--             default is /WEB-INF/[servlet-name]-servlet.xml -->
+		<!--  
+		Whether to initialize the servlet or not on startup.
+		1: call "init" of the servlet on server startup.
+		0(default) : call "init" only when the first request happens
+		  -->
 	<servlet>
-		<servlet-name>dispatcher</servlet-name>
+		<servlet-name>springmvcdispatcher</servlet-name>
 		<servlet-class>
 			org.springframework.web.servlet.DispatcherServlet
 		</servlet-class>
+		<!-- optional:  -->
+		<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/springmvcdispatcher-servlet.xml</param-value>
+        </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
+		<servlet-name>springmvcdispatcher</servlet-name>
+		<!-- 
+		The requsts that matches the url-pattern would be assign to the servlet to process.
+		 -->
+		<url-pattern>/dispatcher1/*</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>springmvcdispatcher2</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<!-- optional:  -->
+		<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/springmvcdispatcher2-servlet.xml</param-value>
+        </init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvcdispatcher2</servlet-name>
+		<!-- 
+		The requsts that matches the url-pattern would be assign to the servlet to process.
+		 -->
+		<url-pattern>/front2/*</url-pattern>
 	</servlet-mapping>
 </web-app>
