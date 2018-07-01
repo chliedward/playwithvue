@@ -20,4 +20,12 @@ public class HelloWorldController {
 		view.addObject("name", name);
 		return view;
 	}
+	@RequestMapping("/helloAuth")
+	public ModelAndView welcomeMessageAuth(
+			@RequestParam(value = "name", required = false) String name) {
+		// Name of your jsp file as parameter
+		ModelAndView view = new ModelAndView("hello");
+		view.addObject("name", name);
+		return view;
+	}
 }

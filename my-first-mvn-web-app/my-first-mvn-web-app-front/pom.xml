@@ -12,8 +12,8 @@
   <parent>
   		<groupId>my-first-mvn-web-app</groupId>
   		<artifactId>my-first-mvn-web-app-build</artifactId>
-  		<version>18.06.SNAPSHOT</version>
-  		<relativePath>./my-first-mvn-web-app-build</relativePath>
+  		<version>18.06-SNAPSHOT</version>
+  		<relativePath>../my-first-mvn-web-app-build</relativePath>
   </parent>
 
   <dependencies>
@@ -31,6 +31,11 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter</artifactId>
 	</dependency>
+	<!-- Spring Security -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-test</artifactId>

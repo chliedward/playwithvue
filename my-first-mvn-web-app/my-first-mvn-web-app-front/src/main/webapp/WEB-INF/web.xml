@@ -9,20 +9,31 @@
 		<param-value>
 		/WEB-INF/springmvcdispatcher-servlet.xml,
 		/WEB-INF/springmvcdispatcher2-servlet.xml,
+		/WEB-INF/security/security-servlet.xml
 		</param-value>
 	</context-param>
-	
+	 <!-- Spring Security Necessary-->
+	 <!-- see also:  -->
+	 <filter>
+	  <filter-name>springSecurityFilterChain</filter-name>
+	  <filter-class>org.springframework.web.filter.DelegatingFilterProxy </filter-class>            
+	 </filter>
+	 <filter-mapping>
+	  <filter-name>springSecurityFilterChain</filter-name>
+	  <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+	 <!-- Spring Security Necessary ends-->
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
         <!--             default is /WEB-INF/[servlet-name]-servlet.xml -->
-		<!--  
-		Whether to initialize the servlet or not on startup.
-		1: call "init" of the servlet on server startup.
-		0(default) : call "init" only when the first request happens
-		  -->
+		<!--  -->
+<!-- 		Whether to initialize the servlet or not on startup. -->
+<!-- 		1: call "init" of the servlet on server startup. -->
+<!-- 		0(default) : call "init" only when the first request happens -->
+		<!--   -->
 	<servlet>
 		<servlet-name>springmvcdispatcher</servlet-name>
 		<servlet-class>
@@ -37,9 +48,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springmvcdispatcher</servlet-name>
-		<!-- 
-		The requsts that matches the url-pattern would be assign to the servlet to process.
-		 -->
+		<!-- The requsts that matches the url-pattern would be assign to the servlet to process. -->
 		<url-pattern>/dispatcher1/*</url-pattern>
 	</servlet-mapping>
 		<servlet>
@@ -56,9 +65,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springmvcdispatcher2</servlet-name>
-		<!-- 
-		The requsts that matches the url-pattern would be assign to the servlet to process.
-		 -->
-		<url-pattern>/front2/*</url-pattern>
+		<!--  The requsts that matches the url-pattern would be assign to the servlet to process. -->
+		<url-pattern>/dispatcher2/*</url-pattern>
 	</servlet-mapping>
 </web-app>
