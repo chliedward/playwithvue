@@ -7,6 +7,7 @@
     <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+		<!--/WEB-INF/springmvcdispatcher-auth-servlet.xml-->
 		/WEB-INF/springmvcdispatcher-servlet.xml,
 		/WEB-INF/springmvcdispatcher2-servlet.xml,
 		/WEB-INF/security/security-servlet.xml
@@ -34,6 +35,34 @@
 <!-- 		1: call "init" of the servlet on server startup. -->
 <!-- 		0(default) : call "init" only when the first request happens -->
 		<!--   -->
+	<servlet>
+		<servlet-name>springmvcdispatcherauth</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<!-- this init-param allows java style config instead of xml style -->
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>
+				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		<!-- optional:  -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				config.security.AuthConfig,
+				config.security.WebSecurityConfig
+				<!--/WEB-INF/springmvcdispatcher-auth-servlet.xml-->
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvcdispatcherauth</servlet-name>
+		<!-- The requsts that matches the url-pattern would be assign to the servlet to process. -->
+		<url-pattern>/auth/*</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>springmvcdispatcher</servlet-name>
 		<servlet-class>

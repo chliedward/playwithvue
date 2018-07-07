@@ -41,6 +41,15 @@
 		<artifactId>spring-boot-starter-test</artifactId>
 		<scope>test</scope>
 	</dependency>
+    <dependency>
+          <groupId>my-first-mvn-web-app</groupId>
+          <artifactId>my-first-mvn-web-app-dao</artifactId>
+    </dependency>
+
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+      </dependency>
   </dependencies>
   <build>
     <finalName>front</finalName>

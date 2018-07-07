@@ -19,7 +19,9 @@
   <modules>
 	<module>my-first-mvn-web-app-build</module>
 	<module>my-first-mvn-web-app-front</module>
-	
+    <module>my-first-mvn-web-app-dao</module>
+      <module>my-first-mvn-web-app-vo</module>
+
   </modules>
   
 </project>

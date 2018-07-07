@@ -15,6 +15,9 @@
 	 <maven.compiler.source>1.8</maven.compiler.source>
 	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	 <junit.version>3.8.1</junit.version>
+
+	 <project.build.version>18.06-SNAPSHOT</project.build.version>
+
 	 <spring.boot.starter>2.0.2.RELEASE</spring.boot.starter>
 	 <spring.version>4.3.5.RELEASE</spring.version>
   </properties>
@@ -43,6 +46,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>${spring.boot.starter}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+		</dependency>
+
+		<!-- In Project: -->
+		<dependency>
+			<groupId>my-first-mvn-web-app</groupId>
+			<artifactId>my-first-mvn-web-app-dao</artifactId>
+			<version>${project.build.version}</version>
 		</dependency>
   	</dependencies>
   </dependencyManagement>

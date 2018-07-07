@@ -1,13 +1,23 @@
 package config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
+@Import(AuthConfig.class)
 @EnableWebSecurity
 /**
  * 
@@ -29,14 +39,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *   @author shang
  * */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
- 
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+
         http.authorizeRequests()
+                .antMatchers("/auth/*").permitAll()
         		.antMatchers("/login.jsp").permitAll()
-            	.antMatchers("/dispatcher1/helloWorld/helloAuth").hasRole("ADMIN")
-                //.antMatchers( "/dispatch1/helloWorld/hello").permitAll()
-                
+                .antMatchers("/login").permitAll()
+                .antMatchers( "/dispatcher1/helloWorld/hello").permitAll()
+                .antMatchers( "/dispatcher1/helloWorld/login").permitAll()
+                .antMatchers( "/dispatcher1/helloWorld/postTest").permitAll()
+            	.antMatchers("/dispatcher1/helloWorld/helloAuth").hasAnyRole("ADMIN","USER")
+
                 .and()
             .formLogin()
                 .loginPage("/login")
@@ -48,9 +72,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER");
+//        auth.inMemoryAuthentication()
+//                .withUser("admin").password("adminpass").roles("ADMIN");
+
+
+        // this line makes ..... DAO uses your userDetailsServiceImpl's method to load user from repo
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
- 
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }
